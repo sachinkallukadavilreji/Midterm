@@ -48,18 +48,21 @@
         {
             Price = newPrice;
         }
+        else { Console.WriteLine("Price needs to be more than zero"); }
     }
 
     // Restock the item
     public void RestockItem(int additionalQuantity)
     {
         // TODO: Increase the item's stock quantity by the additional quantity.
+
         if (additionalQuantity > 0)
         {
             int newQuantity = QuantityInStock;
             newQuantity = newQuantity + additionalQuantity;
             QuantityInStock = newQuantity;
         }
+        else { Console.WriteLine("Quantity needs to be more than zero"); }
     }
 
     // Sell an item
@@ -73,16 +76,16 @@
             totalQuantity = totalQuantity - quantitySold;
             QuantityInStock = totalQuantity;
         }
-        else
-        {
-            Console.WriteLine("For the item: " + ItemName + ", " + QuantityInStock + " units is only available!!");
-        }
+
+        else if (quantitySold < 0) { Console.WriteLine("Quantity needs to be more than zero"); }
+        else{ Console.WriteLine("For the item: " + ItemName + ", " + QuantityInStock + " units is only available!!"); }
     }
 
     // Check if an item is in stock
     public bool IsInStock()
     {
         // TODO: Return true if the item is in stock (quantity > 0), otherwise false.
+
         if (QuantityInStock > 0)
         {
             return true;
@@ -110,12 +113,23 @@ class Program
         // Creating instances of InventoryItem
         InventoryItem item1 = new InventoryItem("Laptop", 101, 1200.50, 10);
         InventoryItem item2 = new InventoryItem("Smartphone", 102, 800.30, 15);
-        item1.SellItem(10);
+
+        // 1. Print details of all items.
         item1.PrintDetails();
 
-        Console.WriteLine("Hello" + item1.IsInStock());
-
+        // 2. Sell some items and then print the updated details.
+        item1.SellItem(5);
         item1.PrintDetails();
+
+        // 3. Restock an item and print the updated details.
+        item2.RestockItem(5);
+        item2.PrintDetails();
+
+        // 4. Check if an item is in stock and print a message accordingly.
+        item1.SellItem(5);
+        item1.PrintDetails();
+        if (item1.IsInStock()) { Console.WriteLine("Item is avaialable"); }
+        else { Console.WriteLine("item is not avaialble"); }
 
         // TODO: Implement logic to interact with these objects.
         // Example tasks:
