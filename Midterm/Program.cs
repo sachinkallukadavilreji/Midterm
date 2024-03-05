@@ -98,10 +98,12 @@
     {
         // TODO: Print the details of the item (name, id, price, and stock quantity).
 
+        Console.WriteLine("");
         Console.WriteLine("\n Product ID: " + this.ItemId);
         Console.WriteLine(" Product Name: " + this.ItemName);
         Console.WriteLine(" Product price: " + this.Price);
         Console.WriteLine(" Product stock available: " + this.QuantityInStock);
+        Console.WriteLine("");
 
     }
 }
@@ -114,19 +116,34 @@ class Program
         InventoryItem item1 = new InventoryItem("Laptop", 101, 1200.50, 10);
         InventoryItem item2 = new InventoryItem("Smartphone", 102, 800.30, 15);
 
+        int itemCount;
+
         // 1. Print details of all items.
+        Console.WriteLine("// 1. Print details of all items.");
         item1.PrintDetails();
+        item2.PrintDetails();
 
         // 2. Sell some items and then print the updated details.
-        item1.SellItem(5);
+        Console.WriteLine("// 2. Sell some items and then print the updated details.");
+        Console.Write("Enter the number of items you want to sell: ");
+        itemCount = Convert.ToInt32(Console.ReadLine()) ;
+        item1.SellItem(itemCount);
         item1.PrintDetails();
 
         // 3. Restock an item and print the updated details.
-        item2.RestockItem(5);
+        Console.WriteLine("// 3. Restock an item and print the updated details.");
+        Console.Write("Enter the number of items you want to restock: ");
+        itemCount = Convert.ToInt32(Console.ReadLine());
+        item2.RestockItem(itemCount);
         item2.PrintDetails();
 
         // 4. Check if an item is in stock and print a message accordingly.
-        item1.SellItem(5);
+        Console.WriteLine("// 4. Check if an item is in stock and print a message accordingly.");
+        Console.WriteLine("Sell all the stock of the product");
+        item1.PrintDetails() ;
+        Console.Write("Enter the number of items you want to sell: ");
+        itemCount = Convert.ToInt32(Console.ReadLine());
+        item1.SellItem(itemCount);
         item1.PrintDetails();
         if (item1.IsInStock()) { Console.WriteLine("Item is avaialable"); }
         else { Console.WriteLine("item is not avaialble"); }
